@@ -13,7 +13,11 @@ const Home = () => {
 
   const getBreeds = async () => {
     try {
+      const dogs = "dogs"
       setError("")
+      // Ideally you would use redux instead of loacl storage here
+      const savedDogs = JSON.parse(localStorage.getItem(dogs))
+      if (savedDogs) return setDogs(savedDogs);
       const data = await __GetAllBreeds();
       let dogsList = [];
       for (const property in data.message) {
@@ -25,7 +29,9 @@ const Home = () => {
           })
         }
       }
-      setDogs(dogsList.sort());
+      const sortedDogList = dogsList.sort()
+      localStorage.setItem(dogs, JSON.stringify(sortedDogList))
+      setDogs(sortedDogList);
     } catch (error) {
       setError(error.message)
     }
