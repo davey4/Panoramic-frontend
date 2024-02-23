@@ -15,7 +15,7 @@ export const __GetAllBreeds = async () => {
 
 export const __GetBreedInfo = async (breed) => {
   try {
-    const res = await ApiClient.get(`breed/${breed}/images/random`);
+    const res = await ApiClient.get(`breed/${breed}/images`);
     return res.data;
   } catch (error) {
     throw error;
